@@ -3,358 +3,802 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACHIMAN - Asociación Chilena de Mantenimiento y Confiabilidad</title>
+  <title>ACHIMAN · Asociación Chilena de Mantenimiento y Confiabilidad</title>
+  <meta name="description" content="ACHIMAN: comunidad técnica chilena de mantenimiento, confiabilidad y gestión de activos. Formación, estándares y colaboración industria–academia." />
 
   <style>
-    :root {
-      --bg: #f5f5f5;
-      --bg-card: #ffffff;
-      --text: #111827;
-      --text-muted: #6b7280;
-      --accent: #0f766e;
-      --accent-soft: #ccfbf1;
-      --border: #e5e7eb;
-      --danger: #b91c1c;
+    :root{
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface-2: #f7f8fb;
+      --text: #121826;
+      --muted: #6b7280;
+      --border: rgba(17,24,39,.10);
+
+      --shadow: 0 18px 40px rgba(17,24,39,.10);
+      --shadow-soft: 0 10px 24px rgba(17,24,39,.08);
+
+      /* “BusinessM4 vibe”: gradientes suaves + botones pill */
+      --grad-1: linear-gradient(135deg, rgba(93,63,255,.14), rgba(0,209,255,.10));
+      --grad-2: linear-gradient(135deg, #5d3fff, #00d1ff);
+      --accent: #5d3fff;
+      --accent-2: #00d1ff;
       --success: #166534;
+      --danger: #b91c1c;
+
+      --radius: 18px;
+      --radius-lg: 26px;
+      --max: 1120px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: var(--bg);
+    *{ box-sizing: border-box; margin:0; padding:0; }
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
       color: var(--text);
-      line-height: 1.6;
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a{ color: inherit; text-decoration: none; }
+    img{ max-width:100%; display:block; }
+
+    /* Layout */
+    .container{ max-width: var(--max); margin: 0 auto; padding: 0 18px; }
+    section{ padding: 72px 0; }
+    .muted{ color: var(--muted); }
+    .pill{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(17,24,39,.02);
+      font-size: .82rem;
+      color: rgba(17,24,39,.82);
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+    /* Topbar / Nav */
+    header{
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,.78);
       backdrop-filter: blur(10px);
-      background-color: rgba(245, 245, 245, 0.95);
-      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      border-bottom: 1px solid var(--border);
     }
-
-    .nav {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0.75rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      font-size: 0.9rem;
-      text-transform: uppercase;
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
     }
+    .mark{
+      width: 42px; height:42px; border-radius: 999px;
+      background: var(--grad-2);
+      box-shadow: 0 10px 22px rgba(93,63,255,.22);
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:800; letter-spacing:.05em;
+      font-size: .82rem;
+    }
+    .brand-title{
+      font-weight: 800; letter-spacing: .03em; text-transform: uppercase;
+      font-size: .92rem;
+      line-height: 1.1;
+    }
+    .brand-sub{ font-size: .78rem; color: var(--muted); margin-top: 2px; }
 
-    .logo-mark {
-      width: 34px;
-      height: 34px;
+    .links{ display:flex; align-items:center; gap: 10px; flex-wrap: wrap; justify-content:flex-end; }
+    .links a{
+      padding: .42rem .65rem;
       border-radius: 999px;
-      border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: var(--accent);
+      color: rgba(17,24,39,.72);
+      font-size: .92rem;
     }
+    .links a:hover{ background: rgba(93,63,255,.08); color: rgba(93,63,255,.95); }
 
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .nav-links a {
-      padding: 0.25rem 0.6rem;
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+      padding: .58rem 1.05rem;
       border-radius: 999px;
-      color: var(--text-muted);
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor:pointer;
+      font-weight: 600;
+      font-size: .92rem;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+      white-space: nowrap;
     }
-
-    .nav-cta {
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      background-color: var(--accent);
-      color: white;
-      font-size: 0.85rem;
-      border: none;
-      cursor: pointer;
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .btn-primary{
+      border-color: transparent;
+      background: var(--grad-2);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(93,63,255,.18);
     }
-
-    /* MAIN */
-    main {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 2rem 1rem 3rem;
-    }
-
-    section {
-      margin-top: 3rem;
+    .btn-primary:hover{ box-shadow: 0 18px 40px rgba(93,63,255,.22); }
+    .btn-ghost{
+      background: rgba(17,24,39,.02);
     }
 
     /* HERO */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 2rem;
+    .hero{
+      padding: 72px 0 40px;
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(93,63,255,.16), transparent 60%),
+        radial-gradient(900px 520px at 85% 25%, rgba(0,209,255,.14), transparent 55%),
+        linear-gradient(180deg, rgba(247,248,251,1), rgba(255,255,255,1));
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 26px;
       align-items: center;
-      margin-top: 2rem;
     }
-
-    .hero-title {
-      font-size: clamp(2rem, 3vw + 0.5rem, 2.8rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.12;     /* 👈 AJUSTE CLAVE */
-      margin-bottom: 0.6rem;
+    .h1{
+      font-size: clamp(2.05rem, 2.8vw + .6rem, 3.05rem);
+      font-weight: 900;
+      letter-spacing: -.035em;
+      line-height: 1.08; /* compactito (como pediste) */
+      margin-top: 10px;
+      margin-bottom: 14px;
     }
-
-    .hero-subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 36rem;
-      margin-bottom: 1.2rem;
+    .lead{
+      font-size: 1.02rem;
+      color: rgba(17,24,39,.70);
+      max-width: 44rem;
+      margin-bottom: 18px;
     }
+    .cta-row{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .badges{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 18px; }
 
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-tag {
-      border-radius: 999px;
+    .hero-card{
+      background: var(--surface);
       border: 1px solid var(--border);
-      padding: 0.2rem 0.7rem;
-      color: var(--text-muted);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
     }
-
-    .btn-primary {
-      padding: 0.55rem 1.2rem;
-      border-radius: 999px;
-      border: none;
-      background-color: var(--accent);
-      color: white;
-      font-size: 0.9rem;
-      cursor: pointer;
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: var(--grad-1);
+      opacity: .9;
+      pointer-events:none;
     }
-
-    .hero-card {
-      background-color: var(--bg-card);
-      border-radius: 1.2rem;
+    .hero-card > *{ position: relative; }
+    .hero-card h3{
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      letter-spacing: -.02em;
+    }
+    .mini-grid{
+      display:grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      margin-top: 14px;
+    }
+    .mini{
+      border-radius: 16px;
       border: 1px solid var(--border);
-      padding: 1.3rem;
-      font-size: 0.85rem;
+      background: rgba(255,255,255,.72);
+      padding: 12px 12px;
     }
+    .mini .k{ font-size: .75rem; color: var(--muted); }
+    .mini .v{ font-size: .98rem; font-weight: 800; margin-top: 2px; line-height: 1.15; }
 
-    /* SECCIONES */
-    h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
+    /* Section headings */
+    .section-head{ margin-bottom: 22px; }
+    .section-head h2{
+      font-size: 1.7rem;
+      letter-spacing: -.03em;
+      margin-bottom: 8px;
     }
+    .section-head p{ color: var(--muted); max-width: 52rem; }
 
-    .section-subtitle {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-      max-width: 40rem;
-    }
-
-    .grid-3 {
-      display: grid;
+    /* Cards / blocks */
+    .grid-3{
+      display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
+      gap: 14px;
     }
-
-    .card {
-      background-color: var(--bg-card);
-      border-radius: 1rem;
-      padding: 1rem;
+    .card{
+      background: var(--surface);
       border: 1px solid var(--border);
-      font-size: 0.9rem;
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 12px 26px rgba(17,24,39,.06);
     }
+    .card h3{ font-size: 1.05rem; margin-bottom: 8px; letter-spacing: -.02em; }
+    .card p{ color: rgba(17,24,39,.72); }
+    .card ul{ margin-top: 10px; padding-left: 18px; color: rgba(17,24,39,.72); }
+    .card li{ margin: 6px 0; }
 
-    ul {
-      padding-left: 1.1rem;
-    }
-
-    /* FORMULARIO */
-    .form-wrapper {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 2rem;
-    }
-
-    form {
-      background-color: var(--bg-card);
-      border-radius: 1rem;
-      border: 1px solid var(--border);
-      padding: 1.3rem;
-    }
-
-    .form-group {
-      margin-bottom: 0.75rem;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 0.45rem;
-      border-radius: 0.5rem;
-      border: 1px solid var(--border);
-    }
-
-    textarea {
-      resize: vertical;
-    }
-
-    .status-success { color: var(--success); }
-    .status-error { color: var(--danger); }
-
-    footer {
+    /* Counters */
+    .stats{
+      background: var(--surface-2);
       border-top: 1px solid var(--border);
-      padding: 1rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-align: center;
-      margin-top: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-row{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .stat{
+      background:#fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 12px 26px rgba(17,24,39,.06);
+    }
+    .stat .n{
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: -.02em;
+      background: var(--grad-2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .stat .t{ color: var(--muted); font-size: .9rem; }
+
+    /* Testimonials */
+    .quote{
+      display:flex; flex-direction:column; gap: 10px;
+      position: relative;
+    }
+    .quote::before{
+      content:"“";
+      position:absolute;
+      top:-18px; left: 10px;
+      font-size: 64px;
+      color: rgba(93,63,255,.20);
+      font-weight: 900;
+      line-height: 1;
+    }
+    .quote p{ margin-left: 22px; color: rgba(17,24,39,.75); }
+    .who{ margin-left: 22px; font-weight: 800; }
+    .role{ margin-left: 22px; font-size: .9rem; color: var(--muted); }
+
+    /* Partners */
+    .logos{
+      display:grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      align-items:center;
+    }
+    .logo-box{
+      border: 1px dashed rgba(17,24,39,.18);
+      border-radius: 14px;
+      padding: 12px;
+      text-align:center;
+      color: rgba(17,24,39,.55);
+      font-size: .85rem;
+      background: rgba(255,255,255,.65);
     }
 
-    @media (max-width: 900px) {
-      .hero, .form-wrapper {
-        grid-template-columns: 1fr;
-      }
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
+    /* Form */
+    .form-wrap{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items:start;
+    }
+    form{
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-soft);
+    }
+    label{ display:block; font-size:.85rem; font-weight:700; margin: 10px 0 6px; }
+    input, select, textarea{
+      width:100%;
+      padding: .62rem .72rem;
+      border-radius: 14px;
+      border: 1px solid rgba(17,24,39,.16);
+      background: #fff;
+      outline:none;
+      font-size: .95rem;
+      transition: border-color .12s ease, box-shadow .12s ease;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(93,63,255,.65);
+      box-shadow: 0 0 0 4px rgba(93,63,255,.12);
+    }
+    textarea{ min-height: 92px; resize: vertical; }
+    .help{ margin-top: 6px; font-size: .82rem; color: var(--muted); }
+    .status{ margin-top: 10px; font-size: .9rem; }
+    .ok{ color: var(--success); font-weight: 700; }
+    .bad{ color: var(--danger); font-weight: 700; }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid var(--border);
+      padding: 22px 0;
+      color: var(--muted);
+      font-size: .9rem;
+      background: #fff;
+    }
+    .foot{
+      display:flex; align-items:center; justify-content:space-between; gap: 10px; flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid, .form-wrap{ grid-template-columns: 1fr; }
+      .stats-row{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .logos{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width: 720px){
+      .grid-3{ grid-template-columns: 1fr; }
+      .links{ justify-content:flex-start; }
+      .brand{ min-width: 0; }
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#inicio" aria-label="ACHIMAN">
+          <div class="mark">ACM</div>
+          <div>
+            <div class="brand-title">ACHIMAN</div>
+            <div class="brand-sub">Mantenimiento & Confiabilidad</div>
+          </div>
+        </a>
 
-<header>
-  <div class="nav">
-    <div class="logo">
-      <div class="logo-mark">ACM</div>
-      <div>
-        <div>ACHIMAN</div>
-        <div style="font-size:0.7rem;color:var(--text-muted);font-weight:400;">
-          Mantenimiento & Confiabilidad
+        <nav class="links" aria-label="Navegación">
+          <a href="#nosotros">Nosotros</a>
+          <a href="#lineas">Líneas</a>
+          <a href="#comunidad">Comunidad</a>
+          <a href="#registro">Registro</a>
+          <a href="#contacto">Contacto</a>
+          <button class="btn btn-primary" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">
+            Hazte socio(a) →
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="pill">Asociación técnica · Comunidad · Formación</span>
+          <h1 class="h1">
+            Asociación Chilena de<br>
+            Mantenimiento y<br>
+            Confiabilidad
+          </h1>
+
+          <p class="lead">
+            ACHIMAN articula a profesionales, empresas y academia para fortalecer la
+            gestión de activos, la confiabilidad operacional y las buenas prácticas
+            de mantenimiento en Chile, con enfoque práctico y colaborativo.
+          </p>
+
+          <div class="cta-row">
+            <button class="btn btn-primary" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">
+              Registrar interés →
+            </button>
+            <button class="btn btn-ghost" onclick="document.getElementById('lineas').scrollIntoView({behavior:'smooth'})">
+              Ver líneas de trabajo
+            </button>
+          </div>
+
+          <div class="badges">
+            <span class="pill">Gestión de Activos / ISO 55000</span>
+            <span class="pill">Confiabilidad & RCFA</span>
+            <span class="pill">Mantenimiento Proactivo</span>
+            <span class="pill">Formación continua</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>¿Qué propone ACHIMAN?</h3>
+          <p class="muted">
+            Un espacio técnico para compartir casos reales, generar estándares,
+            impulsar investigación aplicada y conectar necesidades de la industria
+            con capacidades profesionales y académicas.
+          </p>
+
+          <div class="mini-grid" aria-label="Resumen rápido">
+            <div class="mini">
+              <div class="k">Alcance</div>
+              <div class="v">Chile · LATAM</div>
+            </div>
+            <div class="mini">
+              <div class="k">Foco</div>
+              <div class="v">Activos físicos</div>
+            </div>
+            <div class="mini">
+              <div class="k">Formato</div>
+              <div class="v">Sin fines de lucro</div>
+            </div>
+            <div class="mini">
+              <div class="k">Participan</div>
+              <div class="v">Industria · Academia</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros">
+    <div class="container">
+      <div class="section-head">
+        <h2>Nosotros</h2>
+        <p>
+          ACHIMAN nace para articular una comunidad técnica en torno al mantenimiento,
+          la confiabilidad y la gestión de activos, con foco en transferencia de
+          conocimiento, ética profesional e impacto operacional.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Misión</h3>
+          <p>
+            Promover el desarrollo del mantenimiento y la confiabilidad como disciplinas
+            clave para la seguridad, competitividad y sostenibilidad, conectando industria,
+            academia y sector público.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Visión</h3>
+          <p>
+            Ser la asociación de referencia en Chile en mantenimiento y confiabilidad,
+            reconocida por su aporte técnico y colaboración nacional e internacional.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Valores</h3>
+          <ul>
+            <li>Rigurosidad técnica</li>
+            <li>Colaboración y comunidad</li>
+            <li>Ética profesional</li>
+            <li>Innovación y mejora continua</li>
+          </ul>
         </div>
       </div>
     </div>
+  </section>
 
-    <nav class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#lineas">Líneas</a>
-      <a href="#registro">Registro</a>
-    </nav>
+  <!-- LINEAS -->
+  <section id="lineas">
+    <div class="container">
+      <div class="section-head">
+        <h2>Líneas de trabajo</h2>
+        <p>Bloques de acción para construir comunidad, formación y estándares con foco práctico.</p>
+      </div>
 
-    <button class="nav-cta" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">
-      Hazte socio(a)
-    </button>
-  </div>
-</header>
-
-<main>
-
-<section id="inicio" class="hero">
-  <div>
-    <h1 class="hero-title">
-      Asociación Chilena de<br>
-      Mantenimiento y<br>
-      Confiabilidad.
-    </h1>
-
-    <p class="hero-subtitle">
-      ACHIMAN reúne a profesionales, académicos y organizaciones de todo Chile
-      comprometidos con el desarrollo del mantenimiento, la gestión de activos
-      y la confiabilidad operacional.
-    </p>
-
-    <div class="hero-tags">
-      <span class="hero-tag">Mantenimiento</span>
-      <span class="hero-tag">Confiabilidad</span>
-      <span class="hero-tag">Gestión de Activos</span>
-      <span class="hero-tag">Formación & Comunidad</span>
+      <div class="grid-3">
+        <div class="card">
+          <span class="pill">Comunidad</span>
+          <h3 style="margin-top:10px;">Red profesional</h3>
+          <ul>
+            <li>Encuentros técnicos y webinars</li>
+            <li>Grupos temáticos por industria</li>
+            <li>Mentoría y networking</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="pill">Formación</span>
+          <h3 style="margin-top:10px;">Capacitación & difusión</h3>
+          <ul>
+            <li>Cursos cortos y charlas</li>
+            <li>Casos de estudio y guías</li>
+            <li>Vinculación con programas académicos</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="pill">Desarrollo</span>
+          <h3 style="margin-top:10px;">Estándares & buenas prácticas</h3>
+          <ul>
+            <li>Documentos técnicos colaborativos</li>
+            <li>Difusión de normas / marcos</li>
+            <li>Vínculos con asociaciones internacionales</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <button class="btn-primary" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">
-      Únete a ACHIMAN →
-    </button>
-  </div>
-
-  <aside class="hero-card">
-    <strong>¿Qué propone ACHIMAN?</strong>
-    <p style="margin-top:0.6rem;">
-      Un espacio técnico-colaborativo para compartir buenas prácticas,
-      desarrollar estándares y fortalecer la confiabilidad operacional en Chile.
-    </p>
-  </aside>
-</section>
-
-<section id="nosotros">
-  <h2>Nosotros</h2>
-  <p class="section-subtitle">
-    ACHIMAN articula una comunidad técnica en torno al mantenimiento y la confiabilidad.
-  </p>
-</section>
-
-<section id="lineas">
-  <h2>Líneas de trabajo</h2>
-  <p class="section-subtitle">
-    Formación, comunidad, estándares y buenas prácticas.
-  </p>
-</section>
-
-<section id="registro">
-  <h2>Registro de interés</h2>
-  <div class="form-wrapper">
-    <form>
-      <div class="form-group">
-        <label>Nombre</label>
-        <input type="text" required />
+  <!-- STATS -->
+  <section class="stats" id="comunidad">
+    <div class="container">
+      <div class="section-head">
+        <h2>Comunidad en construcción</h2>
+        <p>Indicadores referenciales (puedes ajustarlos cuando tengas datos reales).</p>
       </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" required />
+
+      <div class="stats-row">
+        <div class="stat">
+          <div class="n">+100</div>
+          <div class="t">Profesionales objetivo (primer ciclo)</div>
+        </div>
+        <div class="stat">
+          <div class="n">6+</div>
+          <div class="t">Encuentros técnicos / año</div>
+        </div>
+        <div class="stat">
+          <div class="n">3</div>
+          <div class="t">Comités de trabajo iniciales</div>
+        </div>
+        <div class="stat">
+          <div class="n">1</div>
+          <div class="t">Red nacional, enfoque práctico</div>
+        </div>
       </div>
-      <button class="btn-primary">Enviar</button>
-    </form>
-  </div>
-</section>
+    </div>
+  </section>
 
-</main>
+  <!-- TESTIMONIOS -->
+  <section id="testimonios">
+    <div class="container">
+      <div class="section-head">
+        <h2>Testimonios</h2>
+        <p>Textos de ejemplo. Puedes reemplazarlos por citas reales de industria y academia.</p>
+      </div>
 
-<footer>
-  © <span id="year"></span> ACHIMAN · Asociación Chilena de Mantenimiento y Confiabilidad
-</footer>
+      <div class="grid-3">
+        <div class="card quote">
+          <p>La comunidad es clave para mejorar prácticas y acelerar el aprendizaje en terreno.</p>
+          <div class="who">Profesional de Mantenimiento</div>
+          <div class="role">Industria</div>
+        </div>
+        <div class="card quote">
+          <p>Un espacio técnico como ACHIMAN puede conectar investigación aplicada con necesidades reales.</p>
+          <div class="who">Académico/a</div>
+          <div class="role">Universidad</div>
+        </div>
+        <div class="card quote">
+          <p>Estándares y casos compartidos ayudan a mejorar confiabilidad y seguridad en operación.</p>
+          <div class="who">Jefatura de Operaciones</div>
+          <div class="role">Servicios / Energía</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+  <!-- ALIADOS -->
+  <section id="aliados" style="padding-top: 20px;">
+    <div class="container">
+      <div class="section-head">
+        <h2>Aliados y organizaciones</h2>
+        <p>Espacio reservado para logos (cuando existan convenios). Mientras tanto, usa placeholders.</p>
+      </div>
 
+      <div class="logos" aria-label="Logos">
+        <div class="logo-box">Logo 1</div>
+        <div class="logo-box">Logo 2</div>
+        <div class="logo-box">Logo 3</div>
+        <div class="logo-box">Logo 4</div>
+        <div class="logo-box">Logo 5</div>
+        <div class="logo-box">Logo 6</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRO -->
+  <section id="registro">
+    <div class="container">
+      <div class="section-head">
+        <h2>Registro de interés</h2>
+        <p>
+          Completa este formulario para registrar tu interés. Usaremos esta información para
+          contactarte, convocar actividades y construir la comunidad ACHIMAN.
+        </p>
+      </div>
+
+      <div class="form-wrap">
+        <form id="registroForm" autocomplete="on">
+          <label for="nombre">Nombre completo *</label>
+          <input id="nombre" name="nombre" type="text" required />
+
+          <label for="email">Correo electrónico *</label>
+          <input id="email" name="email" type="email" required />
+          <div class="help">Idealmente un correo que revises con frecuencia.</div>
+
+          <label for="organizacion">Organización / Empresa</label>
+          <input id="organizacion" name="organizacion" type="text" />
+
+          <label for="cargo">Cargo / Rol</label>
+          <input id="cargo" name="cargo" type="text" />
+
+          <label for="ciudad">Ciudad / Región</label>
+          <input id="ciudad" name="ciudad" type="text" />
+
+          <label for="area">Área principal de interés *</label>
+          <select id="area" name="area" required>
+            <option value="">Selecciona una opción</option>
+            <option value="mantenimiento">Mantenimiento</option>
+            <option value="confiabilidad">Confiabilidad</option>
+            <option value="gestion_activos">Gestión de activos / ISO 55000</option>
+            <option value="ingenieria">Ingeniería / Proyectos</option>
+            <option value="academia">Academia / Docencia / Investigación</option>
+            <option value="otro">Otro</option>
+          </select>
+
+          <label for="comentario">Comentarios (opcional)</label>
+          <textarea id="comentario" name="comentario" placeholder="Cuéntanos brevemente tu interés en ACHIMAN..."></textarea>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="submit" class="btn btn-primary" id="btnEnviar">Enviar registro</button>
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
+              ¿Dudas? Contáctanos
+            </button>
+          </div>
+
+          <div id="statusMessage" class="status"></div>
+        </form>
+
+        <div class="card">
+          <h3>¿Qué haremos con esta información?</h3>
+          <ul>
+            <li>Construir el listado inicial de personas interesadas.</li>
+            <li>Identificar focos temáticos y sectores industriales clave.</li>
+            <li>Invitarte a reuniones de lanzamiento y actividades técnicas.</li>
+          </ul>
+          <p class="muted" style="margin-top:10px;">
+            Tus datos se usarán solo para fines asociados a ACHIMAN (contacto e información de actividades).
+            Más adelante se publicará una política de privacidad formal.
+          </p>
+          <p class="muted" style="margin-top:10px; font-size:.9rem;">
+            Consejo: cuando configures correos @achiman.cl, actualiza el contacto oficial en el sitio.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" style="padding-top: 18px;">
+    <div class="container">
+      <div class="section-head">
+        <h2>Contacto</h2>
+        <p>Colaboraciones, propuestas de actividades, convenios o comunidad.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Correo</h3>
+          <p class="muted">
+            <strong>contacto@achiman.cl</strong><br>
+            (si aún no está operativo, usa un correo provisorio mientras configuras MX).
+          </p>
+        </div>
+        <div class="card">
+          <h3>Canales</h3>
+          <p class="muted">
+            Próximamente: LinkedIn · Newsletter · Calendario de actividades.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Ubicación</h3>
+          <p class="muted">
+            Chile (red nacional). Reuniones online y presenciales según actividades.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>© <span id="year"></span> ACHIMAN · Asociación Chilena de Mantenimiento y Confiabilidad</div>
+        <div class="muted" style="font-size:.88rem;">Sitio en desarrollo · GitHub Pages</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Año
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href").substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  </script>
+
+  <!-- Firebase (Firestore) - igual que tu enfoque anterior -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <script>
+    // REEMPLAZA por tu config real (Firebase console → Project settings → Web app)
+    var firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_PROYECTO.firebaseapp.com",
+      projectId: "TU_PROYECTO",
+      storageBucket: "TU_PROYECTO.appspot.com",
+      messagingSenderId: "TU_SENDER_ID",
+      appId: "TU_APP_ID"
+    };
+
+    // Si no has configurado Firebase aún, evita que el sitio “rompa”:
+    var firebaseReady = true;
+    try {
+      if (firebaseConfig.apiKey === "TU_API_KEY") firebaseReady = false;
+      if (firebaseReady) firebase.initializeApp(firebaseConfig);
+    } catch (e) {
+      firebaseReady = false;
+    }
+
+    var db = firebaseReady ? firebase.firestore() : null;
+
+    var registroForm = document.getElementById("registroForm");
+    var statusMessage = document.getElementById("statusMessage");
+    var btnEnviar = document.getElementById("btnEnviar");
+
+    function setStatus(msg, kind){
+      statusMessage.textContent = msg;
+      statusMessage.className = "status " + (kind || "");
+    }
+
+    registroForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Validación mínima
+      var payload = {
+        nombre: document.getElementById("nombre").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        organizacion: document.getElementById("organizacion").value.trim(),
+        cargo: document.getElementById("cargo").value.trim(),
+        ciudad: document.getElementById("ciudad").value.trim(),
+        area: document.getElementById("area").value,
+        comentario: document.getElementById("comentario").value.trim(),
+        fechaRegistro: new Date().toISOString()
+      };
+
+      if (!payload.nombre || !payload.email || !payload.area) {
+        setStatus("Por favor completa los campos obligatorios (*).", "bad");
+        return;
+      }
+
+      // Si Firebase no está configurado, muestra aviso amigable
+      if (!firebaseReady || !db) {
+        setStatus("Registro listo, pero Firebase aún no está configurado. Reemplaza la configuración en el código para activar el envío.", "bad");
+        return;
+      }
+
+      setStatus("", "");
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = "Enviando...";
+
+      db.collection("inscripciones_achiman")
+        .add(payload)
+        .then(function () {
+          registroForm.reset();
+          setStatus("Registro enviado correctamente. ¡Gracias por tu interés en ACHIMAN!", "ok");
+        })
+        .catch(function () {
+          setStatus("Ocurrió un error al enviar el registro. Intenta nuevamente más tarde.", "bad");
+        })
+        .finally(function () {
+          btnEnviar.disabled = false;
+          btnEnviar.textContent = "Enviar registro";
+        });
+    });
+  </script>
 </body>
 </html>
+
