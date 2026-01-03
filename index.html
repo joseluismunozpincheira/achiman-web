@@ -31,6 +31,12 @@
       line-height: 1.6;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
     header {
       position: sticky;
       top: 0;
@@ -82,16 +88,10 @@
       padding: 0.25rem 0.6rem;
       border-radius: 999px;
       color: var(--text-muted);
-      transition: background-color 0.15s ease, color 0.15s ease;
-    }
-
-    .nav-links a:hover {
-      background-color: var(--accent-soft);
-      color: var(--accent);
     }
 
     .nav-cta {
-      padding: 0.4rem 1rem;
+      padding: 0.45rem 1rem;
       border-radius: 999px;
       background-color: var(--accent);
       color: white;
@@ -100,10 +100,15 @@
       cursor: pointer;
     }
 
+    /* MAIN */
     main {
       max-width: 1080px;
       margin: 0 auto;
       padding: 2rem 1rem 3rem;
+    }
+
+    section {
+      margin-top: 3rem;
     }
 
     /* HERO */
@@ -116,10 +121,10 @@
     }
 
     .hero-title {
-      font-size: clamp(2.1rem, 3vw + 0.5rem, 2.9rem);
+      font-size: clamp(2rem, 3vw + 0.5rem, 2.8rem);
       font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1.12;       /* 👈 CORRECCIÓN CLAVE */
+      letter-spacing: -0.03em;
+      line-height: 1.12;     /* 👈 AJUSTE CLAVE */
       margin-bottom: 0.6rem;
     }
 
@@ -127,7 +132,7 @@
       color: var(--text-muted);
       font-size: 0.95rem;
       max-width: 36rem;
-      margin-bottom: 1.3rem;
+      margin-bottom: 1.2rem;
     }
 
     .hero-tags {
@@ -163,14 +168,68 @@
       font-size: 0.85rem;
     }
 
+    /* SECCIONES */
     h2 {
       font-size: 1.4rem;
       margin-bottom: 0.5rem;
     }
 
-    section {
-      margin-top: 3rem;
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      max-width: 40rem;
     }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    ul {
+      padding-left: 1.1rem;
+    }
+
+    /* FORMULARIO */
+    .form-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 2rem;
+    }
+
+    form {
+      background-color: var(--bg-card);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      padding: 1.3rem;
+    }
+
+    .form-group {
+      margin-bottom: 0.75rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.45rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .status-success { color: var(--success); }
+    .status-error { color: var(--danger); }
 
     footer {
       border-top: 1px solid var(--border);
@@ -182,7 +241,10 @@
     }
 
     @media (max-width: 900px) {
-      .hero {
+      .hero, .form-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .grid-3 {
         grid-template-columns: 1fr;
       }
     }
@@ -197,7 +259,7 @@
       <div class="logo-mark">ACM</div>
       <div>
         <div>ACHIMAN</div>
-        <div style="font-size:0.7rem;font-weight:400;color:var(--text-muted);">
+        <div style="font-size:0.7rem;color:var(--text-muted);font-weight:400;">
           Mantenimiento & Confiabilidad
         </div>
       </div>
@@ -218,42 +280,71 @@
 
 <main>
 
-  <!-- HERO -->
-  <section id="inicio" class="hero">
-    <div>
-      <h1 class="hero-title">
-        Asociación Chilena de<br>
-        Mantenimiento y<br>
-        Confiabilidad.
-      </h1>
+<section id="inicio" class="hero">
+  <div>
+    <h1 class="hero-title">
+      Asociación Chilena de<br>
+      Mantenimiento y<br>
+      Confiabilidad.
+    </h1>
 
-      <p class="hero-subtitle">
-        ACHIMAN reúne a profesionales, académicos y organizaciones de todo Chile
-        comprometidos con el desarrollo del mantenimiento, la gestión de activos
-        y la confiabilidad operacional.
-      </p>
+    <p class="hero-subtitle">
+      ACHIMAN reúne a profesionales, académicos y organizaciones de todo Chile
+      comprometidos con el desarrollo del mantenimiento, la gestión de activos
+      y la confiabilidad operacional.
+    </p>
 
-      <div class="hero-tags">
-        <span class="hero-tag">Mantenimiento</span>
-        <span class="hero-tag">Confiabilidad</span>
-        <span class="hero-tag">Gestión de Activos</span>
-        <span class="hero-tag">Formación & Comunidad</span>
-      </div>
-
-      <button class="btn-primary" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">
-        Únete a ACHIMAN →
-      </button>
+    <div class="hero-tags">
+      <span class="hero-tag">Mantenimiento</span>
+      <span class="hero-tag">Confiabilidad</span>
+      <span class="hero-tag">Gestión de Activos</span>
+      <span class="hero-tag">Formación & Comunidad</span>
     </div>
 
-    <aside class="hero-card">
-      <strong>¿Qué propone ACHIMAN?</strong>
-      <p style="margin-top:0.6rem;">
-        Un espacio técnico-colaborativo para compartir buenas prácticas,
-        desarrollar estándares y fortalecer la confiabilidad operacional
-        en Chile.
-      </p>
-    </aside>
-  </section>
+    <button class="btn-primary" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">
+      Únete a ACHIMAN →
+    </button>
+  </div>
+
+  <aside class="hero-card">
+    <strong>¿Qué propone ACHIMAN?</strong>
+    <p style="margin-top:0.6rem;">
+      Un espacio técnico-colaborativo para compartir buenas prácticas,
+      desarrollar estándares y fortalecer la confiabilidad operacional en Chile.
+    </p>
+  </aside>
+</section>
+
+<section id="nosotros">
+  <h2>Nosotros</h2>
+  <p class="section-subtitle">
+    ACHIMAN articula una comunidad técnica en torno al mantenimiento y la confiabilidad.
+  </p>
+</section>
+
+<section id="lineas">
+  <h2>Líneas de trabajo</h2>
+  <p class="section-subtitle">
+    Formación, comunidad, estándares y buenas prácticas.
+  </p>
+</section>
+
+<section id="registro">
+  <h2>Registro de interés</h2>
+  <div class="form-wrapper">
+    <form>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" required />
+      </div>
+      <button class="btn-primary">Enviar</button>
+    </form>
+  </div>
+</section>
 
 </main>
 
